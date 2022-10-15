@@ -1,4 +1,5 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { CreateJobDto } from './create-job.dto';
 
 @Controller('jobs')
 export class JobsController {
@@ -7,7 +8,11 @@ export class JobsController {
     return 'This action returns all jobs !!';
   }
   @Get(':id')
-  findOne(@Param() params): string {
-    return `This action returns ${params.id}`;
+  findOne(@Param('id') id: string): string {
+    return `This action returns #${id}`;
+  }
+  @Post()
+  async create(@Body() createJobDto: CreateJobDto) {
+    return `This action adds a new job`;
   }
 }
