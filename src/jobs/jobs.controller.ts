@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { CreateJobDto } from './create-job.dto';
 
 @Controller('jobs')
@@ -12,7 +12,11 @@ export class JobsController {
     return `This action returns #${id}`;
   }
   @Post()
-  async create(@Body() createJobDto: CreateJobDto) {
+  async create(@Body() createJobDto: CreateJobDto): Promise<string> {
     return `This action adds a new job`;
+  }
+  @Delete('id')
+  remove(@Param('id') id: string): string {
+    return `This action removes a job #${id}`;
   }
 }
